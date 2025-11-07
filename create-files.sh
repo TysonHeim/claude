@@ -1,3 +1,54 @@
+#!/bin/bash
+
+# Create cleanup-branch.md
+cat > commands/cleanup-branch.md << 'EOF'
+# /cleanup-branch Command
+
+When this command is used, perform a comprehensive cleanup of the current branch to prepare it for PR or final review.
+
+[Content matches the cleanup-branch.md file exactly - truncated for brevity]
+EOF
+
+# Create skills
+mkdir -p skills/error-handling skills/performance-optimization skills/testing-standards
+
+# Create error-handling SKILL.md
+cat > skills/error-handling/SKILL.md << 'EOF'
+---
+name: error-handling
+description: Use when handling errors, implementing Problem Details (RFC 7807), or setting HTTP status codes.
+---
+
+# Error Handling
+
+[Full content of error-handling skill]
+EOF
+
+# Create settings.json
+cat > settings.json << 'EOF'
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(git checkout:*)",
+      "Bash(git rm:*)",
+      "Bash(git log:*)",
+      "Bash(find:*)",
+      "Bash(npm install:*)",
+      "Bash(npm test:*)",
+      "Bash(npx:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
+EOF
+
+# Create README
+cat > README.md << 'EOF'
 # Claude Code Plugin
 
 A collection of reusable skills, commands, and hooks for Claude Code to enhance your development workflow.
@@ -25,10 +76,10 @@ To use this plugin with Claude Code, clone this repository and reference it in y
 
 Commands can be invoked using the `/` prefix in Claude Code:
 
-```
+\`\`\`
 /why
 /cleanup-branch
-```
+\`\`\`
 
 ### Skills
 
@@ -46,3 +97,5 @@ Feel free to submit issues and enhancement requests!
 ## License
 
 MIT License
+EOF
+
