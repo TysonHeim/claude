@@ -21,26 +21,26 @@ You are conducting a Five Whys analysis to identify the root cause of an issue.
 
 ## Output Format
 
-\`\`\`
+```
 ## Problem Statement
 [Restate the issue clearly]
 
 ## Five Whys Analysis
 
 **Why 1**: [First-level cause]
-→ [Explanation]
+-> [Explanation]
 
 **Why 2**: [Second-level cause]
-→ [Explanation]
+-> [Explanation]
 
 **Why 3**: [Third-level cause]
-→ [Explanation]
+-> [Explanation]
 
 **Why 4**: [Fourth-level cause]
-→ [Explanation]
+-> [Explanation]
 
 **Why 5**: [Root cause]
-→ [Explanation]
+-> [Explanation]
 
 ## Validation
 [Verify the causal chain by working backwards]
@@ -52,7 +52,7 @@ You are conducting a Five Whys analysis to identify the root cause of an issue.
 1. [Solution addressing root cause]
 2. [Solution addressing root cause]
 3. [Preventive measures]
-\`\`\`
+```
 
 ## Guidelines
 

@@ -1,0 +1,45 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(npm:*)",
+      "Bash(pnpm:*)",
+      "Bash(yarn:*)",
+      "Bash(bun:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/track-usage.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/track-usage.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); dir=$(jq -r '.workspace.current_dir' <<< \"$input\"); model=$(jq -r '.model.display_name' <<< \"$input\" | sed 's/Claude //'); cd \"$dir\" 2>/dev/null; repo=$(basename \"$(git rev-parse --show-toplevel 2>/dev/null)\"); branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); usage=$(jq '.context_window.current_usage' <<< \"$input\"); if [ \"$usage\" != \"null\" ]; then cur=$(jq '.input_tokens + .cache_creation_input_tokens + .cache_read_input_tokens' <<< \"$usage\"); sz=$(jq '.context_window.context_window_size' <<< \"$input\"); pct=$((cur * 100 / sz))%; else pct=\"-\"; fi; usage_stats=$($HOME/.claude/hooks/format-usage.sh 2>/dev/null || echo 'A:0 S:0'); printf '%s | %s | %s | %s | %s' \"$pct\" \"$model\" \"$repo\" \"$branch\" \"$usage_stats\""
+  }
+}

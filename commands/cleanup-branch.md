@@ -33,8 +33,6 @@ When this command is used, perform a comprehensive cleanup of the current branch
 
 ## Step 3: Code Quality Scan
 
-Use the **mcp__zen__codereview** tool to perform a comprehensive code review:
-
 ### Review Focus Areas:
 
 **1. Dead Code Detection**
@@ -58,7 +56,7 @@ Use the **mcp__zen__codereview** tool to perform a comprehensive code review:
 - Inconsistent naming
 - Missing error handling
 
-**4. Red Flags** (Critical Issues)
+**4. Red Flags (Critical Issues)**
 - Security vulnerabilities (SQL injection, XSS, auth bypass, etc.)
 - Hardcoded credentials or secrets
 - Unhandled exceptions in critical paths
@@ -68,52 +66,39 @@ Use the **mcp__zen__codereview** tool to perform a comprehensive code review:
 - Missing input validation
 - Improper error messages exposing internals
 
-### Code Review Configuration:
-
-```
-Use mcp__zen__codereview with:
-- review_type: "full"
-- severity_filter: "all"
-- review_validation_type: "external" (use expert model for validation)
-- relevant_files: [all modified files in current branch]
-```
-
 ## Step 4: Generate Cleanup Report
 
 Create a detailed cleanup report with:
 
-### 📋 Branch Summary
+### Branch Summary
 - Branch name
 - Files changed count
 - Lines added/removed
 - Commit count
 
-### 📁 Documentation Moved
+### Documentation Moved
 - List of files moved to `.claude-plans/`
-- Organized structure
 
-### 🧹 Code Changes Needed
+### Code Changes Needed
 
 #### Dead Code Found
-- [ ] File: path/to/file.ts:123 - Unused import `lodash`
-- [ ] File: path/to/file.ts:456 - Commented out code block (20 lines)
-- [ ] File: path/to/file.cs:78 - Unused method `OldHelper()`
+- [ ] File: path/to/file:123 - Unused import
+- [ ] File: path/to/file:456 - Commented out code block
 
 #### Comments to Remove/Update
-- [ ] File: path/to/file.ts:100 - Outdated comment about old implementation
-- [ ] File: path/to/file.cs:250 - TODO that should be addressed or removed
+- [ ] File: path/to/file:100 - Outdated comment
+- [ ] File: path/to/file:250 - TODO that should be addressed
 
 #### Code Smells
-- [ ] File: path/to/file.ts:300 - Method too long (120 lines) - consider splitting
-- [ ] File: path/to/file.cs:50 - Magic number `42` should be a named constant
+- [ ] File: path/to/file:300 - Method too long
+- [ ] File: path/to/file:50 - Magic number
 
-### 🚨 RED FLAGS (Critical)
-- [ ] **SECURITY**: File: auth.ts:45 - Potential SQL injection vulnerability
-- [ ] **SECURITY**: File: config.ts:12 - Hardcoded API key found
-- [ ] **CRITICAL**: File: handler.cs:200 - Unhandled exception in critical path
-- [ ] **BREAKING**: File: api.ts:100 - Breaking API change without migration
+### RED FLAGS (Critical)
+- [ ] **SECURITY**: Description and location
+- [ ] **CRITICAL**: Description and location
+- [ ] **BREAKING**: Description and location
 
-### ✅ Already Clean
+### Already Clean
 - List areas that are already in good shape
 
 ## Step 5: Interactive Cleanup
@@ -161,21 +146,3 @@ After cleanup:
 3. Highlight any remaining RED FLAGS that need manual attention
 4. Suggest running tests
 5. Suggest creating a commit with cleanup changes
-
-## Example Usage
-
-```bash
-/cleanup-branch
-```
-
-This will analyze the current branch and perform all cleanup steps with user guidance.
-
-## Success Criteria
-
-- ✅ All documentation moved to git-ignored folder
-- ✅ Dead code removed
-- ✅ Comments cleaned up
-- ✅ Code smells addressed or documented
-- ✅ RED FLAGS identified and reported (with severity)
-- ✅ User has actionable list of remaining issues
-- ✅ Branch is PR-ready (except for RED FLAGS needing manual fix)

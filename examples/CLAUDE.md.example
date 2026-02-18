@@ -1,0 +1,30 @@
+# Project Instructions
+
+## About
+<!-- Describe yourself and your project -->
+- Name: Your Name
+- Project: Your project description
+
+## Preferences
+- Be concise and direct
+- Prefer modern best practices
+
+## Agent vs Skill Precedence
+
+**Agents take precedence over skills when both could apply.**
+
+### Agent Rules
+| Agent | When to Use |
+|-------|-------------|
+| `playwright-manager` | ANY Playwright/browser automation |
+| `skills-manager` | Creating, editing, or organizing skills |
+
+### Skill Rules
+- Before starting any task, scan available skills for relevant matches
+- Invoke skills via the `Skill` tool when the task matches
+- Prefer skills over manual implementation
+
+## Corrections
+<!-- Add entries when Claude gets something wrong. Format: "Don't X, instead Y" -->
+<!-- Example: -->
+<!-- - Don't use Bash grep for searching code, instead use the Grep tool -->
